@@ -53,3 +53,8 @@ Resources:
         - AWSLambdaBasicExecutionRole
         - AmazonDynamoDBFullAccess
         - AmzaonS3ReadOnlyAccess
+
+  fnBotServicesBucket:
+    Type: AWS::S3::Bucket
+
+  
