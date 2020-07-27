@@ -9,30 +9,45 @@ exports.bulkUpload = async(event, context, callback) => {
     var bucket = process.env.BUCKET
     var jsonServices = await getCsv(bucket, fileName); //can probably make these params
     jsonServices.forEach(element => {
-        createItem(element.serviceName, element.isCounty, element.synonym)
+        //createItem(element.serviceName, element.isCounty, element.synonym)
+        createItem(element)
     });
     callback(null,);
 }
 
-function createItem(serviceName, isCounty, synonyms) {
+function createItem(element) {
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var tableName = process.env.TABLE_NAME;
     var boolIsCounty;
-    if (isCounty == 'true'){
+    var boolIsBoth;
+    if (element.isCounty.toLowerCase() == 'true'){
         boolIsCounty = true;
     } else {
         boolIsCounty = false;
+    }
+    if(element.isBoth.toLowerCase() == 'true'){
+        boolIsBoth = true;
+    } else {
+        boolIsBoth = false;
     }
 
     var params = {
         TableName: tableName,
         Item: {
-            "ServiceName": serviceName.toLowerCase(),
+            "ServiceName": element.serviceName.toLowerCase(),
             "isCounty": boolIsCounty,
-            "Synonyms": synonyms.toLowerCase()
+            //"Synonyms": element.synonyms.toLowerCase(),
+            "isBoth": boolIsBoth,
+            //"alternativeServices": element.alternativeServices.toLowerCase()
         }
     };
+    if(element.synonym){
+        params.Item["Synonyms"] = element.synonym.toLowerCase()
+    }
+    if(element.alternativeServices){
+        params.Item["alternaticeServies"] = element.alternativeServices
+    }
 
     docClient.put(params, function(err, data){
         if(err){

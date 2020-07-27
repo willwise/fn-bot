@@ -7,17 +7,31 @@ exports.createSingleItem = (event, context, callback) => {
     createItem(event.body.serviceName, event.body.isCounty, callback);
 }
 
-function createItem(serviceName, isCounty, callback) {
+function createItem(element, callback) {
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var tableName = process.env.TABLE_NAME;
-    console.log("table name: "+tableName);
+    var boolIsCounty;
+    var boolIsBoth;
+    if (element.isCounty == 'true'){
+        boolIsCounty = true;
+    } else {
+        boolIsCounty = false;
+    }
+    if(element.isBoth == 'true'){
+        boolIsBoth = true;
+    } else {
+        boolIsBoth = false;
+    }
 
     var params = {
         TableName: tableName,
         Item: {
-            "ServiceName": serviceName.toLowerCase(),
-            "isCounty": isCounty.toLowerCase()
+            "ServiceName": element.serviceName.toLowerCase(),
+            "isCounty": boolIsCounty,
+            "Synonyms": element.synonyms.toLowerCase(),
+            "isBoth": boolIsBoth,
+            "alternativeServices": element.alternativeServices.toLowerCase()
         }
     };
 
