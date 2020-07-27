@@ -7,10 +7,6 @@ Parameters:
     Type: String
     Default: dev
     Description: The type of workload (environment) that this stack will run
-  OsApiKey:
-    Type: String
-    Default: mGvGWUtOi5aRYpACv6PyiofCOPkNOhPG
-    Description: The key for the ordinance survey API
 Resources:
   speakToCouncilFunction:
     Type: AWS::Serverless::Function
@@ -25,14 +21,9 @@ Resources:
       - AmazonDynamoDBReadOnlyAccess
       Environment:
         Variables:
-          OS_API_KEY:
-            Fn::Sub:
-            - ${OsApiKey}
-            - OsApiKey:
-                Ref: OsApiKey
           TABLE_NAME:
             Ref: fnBotServicesTable
-      CodeUri: s3://fn-bot-sam-package/335d7f32f9434baa75dae53f73adf22b
+      CodeUri: speakToCouncilFunction
   fnBotServicesTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -65,23 +56,19 @@ Resources:
             Ref: fnBotServicesTable
           BUCKET:
             Ref: fnBotServicesBucket
-      CodeUri: s3://fn-bot-sam-package/335d7f32f9434baa75dae53f73adf22b
+      CodeUri: bulkServiceUpload
   fnBotServicesBucket:
     Type: AWS::S3::Bucket
   fnBotUpdateSlots:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: rebuildBot.rebuildBot
+      Handler: src/rebuldBot/rebuildBot.rebuildBot
       Runtime: nodejs12.x
-      CodeUri: s3://fn-bot-sam-package/76f3fec8b87309f31740059ffaa76027
+      CodeUri: fnBotUpdateSlots
       Description: An Amazon DynamoDB trigger that logs the updates made to a table.
       MemorySize: 128
       Timeout: 23
-      Policies:
-      - CloudWatchFullAccess
-      - AmazonDynamoDBFullAccess
-      - AmazonLexFullAccess
-      - AWSLambdaBasicExecutionRole
+      Role: arn:aws:iam::594626547994:role/service-role/UpdateFNBotSlot
       Events:
         Stream:
           Type: DynamoDB
@@ -91,7 +78,7 @@ Resources:
               - fnBotServicesTable
               - StreamArn
             BatchSize: 1
-            StartingPosition: LATEST
+            StartingPosition: TRIM_HORIZON
       Environment:
         Variables:
           SLOT_NAME:
@@ -103,15 +90,13 @@ Resources:
   CreateFNBotSingleServicesRecord:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: createSingleItem.createSingleItem
+      Handler: src/addSingleSlot/createSingleItem.createSingleItem
       Runtime: nodejs12.x
-      CodeUri: s3://fn-bot-sam-package/b55aa3d6b0cae879fa65e890b6a56306
+      CodeUri: CreateFNBotSingleServicesRecord
       Description: ''
       MemorySize: 128
       Timeout: 3
-      Policies:
-      - AmazonDynamoDBFullAccess
-      - AWSLambdaBasicExecutionRole
+      Role: arn:aws:iam::594626547994:role/service-role/CreateFNBotServicesRecord-role-1lzicc9v
       Environment:
         Variables:
           TABLE_NAME:
@@ -129,9 +114,7 @@ Resources:
       description: a list of council services
       valueSelectionStrategy: TOP_RESOLUTION
       enumerationValues:
-      - value: testing
-        synonyms:
-        - test
+      - value: bins
   speakToCouncilIntent:
     Type: Custom::LexIntent
     DependsOn:

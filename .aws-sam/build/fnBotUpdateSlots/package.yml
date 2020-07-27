@@ -7,10 +7,6 @@ Parameters:
     Type: String
     Default: dev
     Description: The type of workload (environment) that this stack will run
-  OsApiKey:
-    Type: String
-    Default: mGvGWUtOi5aRYpACv6PyiofCOPkNOhPG
-    Description: The key for the ordinance survey API
 Resources:
   speakToCouncilFunction:
     Type: AWS::Serverless::Function
@@ -25,14 +21,9 @@ Resources:
       - AmazonDynamoDBReadOnlyAccess
       Environment:
         Variables:
-          OS_API_KEY:
-            Fn::Sub:
-            - ${OsApiKey}
-            - OsApiKey:
-                Ref: OsApiKey
           TABLE_NAME:
             Ref: fnBotServicesTable
-      CodeUri: s3://fn-bot-sam-package/335d7f32f9434baa75dae53f73adf22b
+      CodeUri: s3://fn-bot-sam-package/1b6d330e4ead95e5ef8bc6f54bd1960d
   fnBotServicesTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -65,23 +56,19 @@ Resources:
             Ref: fnBotServicesTable
           BUCKET:
             Ref: fnBotServicesBucket
-      CodeUri: s3://fn-bot-sam-package/335d7f32f9434baa75dae53f73adf22b
+      CodeUri: s3://fn-bot-sam-package/1b6d330e4ead95e5ef8bc6f54bd1960d
   fnBotServicesBucket:
     Type: AWS::S3::Bucket
   fnBotUpdateSlots:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: rebuildBot.rebuildBot
+      Handler: src/rebuldBot/rebuildBot.rebuildBot
       Runtime: nodejs12.x
-      CodeUri: s3://fn-bot-sam-package/76f3fec8b87309f31740059ffaa76027
+      CodeUri: s3://fn-bot-sam-package/1b6d330e4ead95e5ef8bc6f54bd1960d
       Description: An Amazon DynamoDB trigger that logs the updates made to a table.
       MemorySize: 128
       Timeout: 23
-      Policies:
-      - CloudWatchFullAccess
-      - AmazonDynamoDBFullAccess
-      - AmazonLexFullAccess
-      - AWSLambdaBasicExecutionRole
+      Role: arn:aws:iam::594626547994:role/service-role/UpdateFNBotSlot
       Events:
         Stream:
           Type: DynamoDB
@@ -91,27 +78,17 @@ Resources:
               - fnBotServicesTable
               - StreamArn
             BatchSize: 1
-            StartingPosition: LATEST
-      Environment:
-        Variables:
-          SLOT_NAME:
-            Ref: serviceSlot
-          INTENT_NAME:
-            Ref: speakToCouncilIntent
-          BOT_NAME:
-            Ref: fnBot
+            StartingPosition: TRIM_HORIZON
   CreateFNBotSingleServicesRecord:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: createSingleItem.createSingleItem
+      Handler: src/addSingleSlot/createSingleItem.createSingleItem
       Runtime: nodejs12.x
-      CodeUri: s3://fn-bot-sam-package/b55aa3d6b0cae879fa65e890b6a56306
+      CodeUri: s3://fn-bot-sam-package/1b6d330e4ead95e5ef8bc6f54bd1960d
       Description: ''
       MemorySize: 128
       Timeout: 3
-      Policies:
-      - AmazonDynamoDBFullAccess
-      - AWSLambdaBasicExecutionRole
+      Role: arn:aws:iam::594626547994:role/service-role/CreateFNBotServicesRecord-role-1lzicc9v
       Environment:
         Variables:
           TABLE_NAME:
@@ -123,15 +100,13 @@ Resources:
         Fn::ImportValue: cfn-lex-slot-type-1-0-3-ServiceToken
       name:
         Fn::Sub:
-        - ${AWS::StackName}_service_type_${Workload}
+        - ${AWS::StackName}_service-type-sam_${Workload}
         - Workload:
             Ref: Workload
       description: a list of council services
       valueSelectionStrategy: TOP_RESOLUTION
       enumerationValues:
-      - value: testing
-        synonyms:
-        - test
+      - value: bins
   speakToCouncilIntent:
     Type: Custom::LexIntent
     DependsOn:
@@ -139,18 +114,13 @@ Resources:
     Properties:
       ServiceToken:
         Fn::ImportValue: cfn-lex-intent-1-0-3-ServiceToken
-      name:
-        Fn::Sub:
-        - ${AWS::StackName}_speak_to_council_sam_${Workload}
-        - Workload:
-            Ref: Workload
+      name: speak-to-council-sam
       confirmationPrompt:
-        maxAttempts: 1
+        MaxAttempts: 1
         messages:
         - content: test
           contentType: PlainText
-      fulfillmentActivity:
-        type: ReturnIntent
+      fulfillmentActivity: ReturnIntent
       dialogCodeHook:
         uri:
           Fn::GetAtt:
@@ -179,15 +149,11 @@ Resources:
     Properties:
       ServiceToken:
         Fn::ImportValue: cfn-lex-bot-1-0-4-ServiceToken
-      name:
-        Fn::Sub:
-        - ${AWS::StackName}fn_bot_sam_${Workload}
-        - Workload:
-            Ref: Workload
+      name: fn-bot-sam
       abortStatement:
         messages:
         - content: I dont understand
-          contentType: PlainText
+          contentType: Plaintext
       childDirected: false
       clarificationPrompt:
         maxAttempts: 1
@@ -202,13 +168,4 @@ Resources:
           Ref: speakToCouncilIntent
         intentVersion: $LATEST
       locale: en-US
-      processBehavior: BUILD
-  fnBotPermission:
-    Type: AWS::Lambda::Permission
-    Properties:
-      Action: lambda:InvokeFunction
-      FunctionName:
-        Fn::GetAtt:
-        - speakToCouncilFunction
-        - Arn
-      Principal: lex.amazonaws.com
+      processBehaviour: BUILD

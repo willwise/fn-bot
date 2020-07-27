@@ -23,10 +23,6 @@ Parameters:
     Type: String
     Default: "dev"
     Description: "The type of workload (environment) that this stack will run"
-  OsApiKey:
-    Type: String
-    Default: "mGvGWUtOi5aRYpACv6PyiofCOPkNOhPG"
-    Description: "The key for the ordinance survey API"
 
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
@@ -50,9 +46,7 @@ Resources:
         - AmazonDynamoDBReadOnlyAccess
       Environment:
         Variables:
-          OS_API_KEY: !Sub
-          - '${OsApiKey}'
-          - OsApiKey: !Ref OsApiKey
+          # OS_API_KEY: !Ref OSAPIKEY
           TABLE_NAME:
             Ref: fnBotServicesTable
 
@@ -97,24 +91,20 @@ Resources:
   fnBotUpdateSlots:
     Type: 'AWS::Serverless::Function'
     Properties:
-      Handler: rebuildBot.rebuildBot
+      Handler: src/rebuldBot/rebuildBot.rebuildBot
       Runtime: nodejs12.x
-      CodeUri: ./src/rebuldBot
+      CodeUri: .
       Description: An Amazon DynamoDB trigger that logs the updates made to a table.
       MemorySize: 128
       Timeout: 23
-      Policies: 
-        - CloudWatchFullAccess
-        - AmazonDynamoDBFullAccess
-        - AmazonLexFullAccess
-        - AWSLambdaBasicExecutionRole
+      Role: 'arn:aws:iam::594626547994:role/service-role/UpdateFNBotSlot'
       Events:
         Stream:
           Type: DynamoDB
           Properties:
             Stream: !GetAtt fnBotServicesTable.StreamArn
             BatchSize: 1
-            StartingPosition: LATEST
+            StartingPosition: TRIM_HORIZON
       Environment:
         Variables:
           SLOT_NAME:
@@ -127,15 +117,14 @@ Resources:
   CreateFNBotSingleServicesRecord:
     Type: 'AWS::Serverless::Function'
     Properties:
-      Handler: createSingleItem.createSingleItem
+      Handler: src/addSingleSlot/createSingleItem.createSingleItem
       Runtime: nodejs12.x
-      CodeUri: ./src/addSingleSlot
+      CodeUri: .
       Description: ''
       MemorySize: 128
       Timeout: 3
-      Policies:
-        - AmazonDynamoDBFullAccess
-        - AWSLambdaBasicExecutionRole
+      Role: >-
+        arn:aws:iam::594626547994:role/service-role/CreateFNBotServicesRecord-role-1lzicc9v
       Environment:
         Variables:
           TABLE_NAME:
@@ -152,9 +141,7 @@ Resources:
       description: a list of council services
       valueSelectionStrategy: TOP_RESOLUTION
       enumerationValues:
-      - value: testing
-        synonyms:
-          - test
+      - value: bins
 
   speakToCouncilIntent:
     Type: Custom::LexIntent

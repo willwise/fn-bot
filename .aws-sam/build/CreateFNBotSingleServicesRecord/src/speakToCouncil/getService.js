@@ -118,6 +118,8 @@ module.exports = async function(intentRequest, callback) {
         const slots = intentRequest.currentIntent.slots;
         // wait for validation result
         const validationResult = await validateService(service, postcode);
+        //console.log(validationResult.SessionAttributes);
+        //console.log(validationResult.isValid);
         
         if(!validationResult.isValid) {
             slots[`${validationResult.violatedSlot}`] = null;
