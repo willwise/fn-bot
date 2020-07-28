@@ -42,6 +42,26 @@ async function validateService(service, postcode) {
 
     let validationResult
 
+    if(JSON.parse(dbService).Items[0].isBoth === true){
+        console.log(JSON.parse(dbService).Items[0].alternativeServies);
+        var altServicesArray = JSON.parse(dbService).Items[0].alternativeServies.split(',')
+        var altService
+        for (let i = 0; i < altServicesArray.length; i++) {
+            if(i===0){
+                altService = altServicesArray[i];
+            } else {
+                altService += " or ";
+                altService += altServicesArray[i];
+            }   
+        }
+        validationResult = {
+            isValid: false,
+            "violatedSlot": 'service',
+            "messageContent": `You've asked for ${service} we need some more information to be able to direct your call. Please tell us if you need for example. ${altService}`
+        }
+        return buildValidationResult(validationResult);
+    }
+
     if(JSON.parse(dbService).Items[0].isCounty = null) {
         validationResult = {
             "isValid": false,

@@ -46,7 +46,7 @@ function createItem(element) {
         params.Item["Synonyms"] = element.synonym.toLowerCase()
     }
     if(element.alternativeServices){
-        params.Item["alternaticeServies"] = element.alternativeServices
+        params.Item["alternativeServies"] = element.alternativeServices
     }
 
     docClient.put(params, function(err, data){
