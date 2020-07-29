@@ -32,7 +32,7 @@ Resources:
                 Ref: OsApiKey
           TABLE_NAME:
             Ref: fnBotServicesTable
-      CodeUri: s3://fn-bot-sam-package/335d7f32f9434baa75dae53f73adf22b
+      CodeUri: s3://fn-bot-sam-package/e04886f92df75361a8e4f98a1473bf9a
   fnBotServicesTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -65,7 +65,7 @@ Resources:
             Ref: fnBotServicesTable
           BUCKET:
             Ref: fnBotServicesBucket
-      CodeUri: s3://fn-bot-sam-package/335d7f32f9434baa75dae53f73adf22b
+      CodeUri: s3://fn-bot-sam-package/e04886f92df75361a8e4f98a1473bf9a
   fnBotServicesBucket:
     Type: AWS::S3::Bucket
   fnBotUpdateSlots:
@@ -73,7 +73,7 @@ Resources:
     Properties:
       Handler: rebuildBot.rebuildBot
       Runtime: nodejs12.x
-      CodeUri: s3://fn-bot-sam-package/76f3fec8b87309f31740059ffaa76027
+      CodeUri: s3://fn-bot-sam-package/975a12598e1fbeba0f4bd3629e30f895
       Description: An Amazon DynamoDB trigger that logs the updates made to a table.
       MemorySize: 128
       Timeout: 23
@@ -105,7 +105,7 @@ Resources:
     Properties:
       Handler: createSingleItem.createSingleItem
       Runtime: nodejs12.x
-      CodeUri: s3://fn-bot-sam-package/b55aa3d6b0cae879fa65e890b6a56306
+      CodeUri: s3://fn-bot-sam-package/a6b33837cb46dae717b4157cef015934
       Description: ''
       MemorySize: 128
       Timeout: 3

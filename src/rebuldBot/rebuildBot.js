@@ -22,12 +22,21 @@ exports.rebuildBot = async (event, context) => {
     for (const record of event.Records) {
         if(record.eventName === "INSERT"){
             console.log('DynamoDB Record: %j', record.dynamodb.NewImage.ServiceName.S);
-            var array = record.dynamodb.NewImage.Synonyms.S.split(',');
-            console.log(array);
-            slotTypePromise.enumerationValues.push({
-                synonyms: array,
+            console.log(record.dynamodb.NewImage);
+            var array = []
+            if(record.dynamodb.NewImage.hasOwnProperty("Synonyms")){
+                array = record.dynamodb.NewImage.Synonyms.S.split(',');
+                console.log(array);
+            }
+            var item = {
                 value: record.dynamodb.NewImage.ServiceName.S
-            });
+            }
+
+            if(array.length > 0){
+                item['synonyms'] = array;
+            }
+
+            slotTypePromise.enumerationValues.push(item);
         }
     }
     // return `Successfully processed ${event.Records.length} records.`;
