@@ -23,7 +23,7 @@ function createItem(element) {
         TableName: tableName,
         Item: {
             "PlaceName": element.PlaceName.toLowerCase(),
-            "DistrictOrBorough": element.LocalAuthority.toLowerCase()
+            "DistrictOrBorough": element.LocalAuthority.toUpperCase()
         }
     };
 
