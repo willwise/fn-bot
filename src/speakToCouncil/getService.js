@@ -41,7 +41,7 @@ async function validateService(service, place) {
         validationResult = {
             "isValid": false,
             "violatedSlot": 'service',
-            "messageContent": `This service doesn't exist`
+            "messageContent": `Sorry. I didn't quite understand that. can you please try again or use a different key word`
         }
         return buildValidationResult(validationResult)
     }
@@ -68,7 +68,7 @@ async function validateService(service, place) {
         validationResult = {
             isValid: false,
             "violatedSlot": 'service',
-            "messageContent": `You've asked for ${service} we need some more information to be able to direct your call. Please tell us if you need for example. ${altService}`
+            "messageContent": `You've asked for ${service}. I need some more information to be able to direct your call. for example, do you need ${altService}`
         }
         return buildValidationResult(validationResult);
     }
@@ -77,7 +77,7 @@ async function validateService(service, place) {
         validationResult = {
             "isValid": false,
             "violatedSlot": 'service',
-            "messageContent": `The service ${service} doesn't exist`
+            "messageContent": `Sorry. I didn't understand you, please try a different key word.`
         }
         return buildValidationResult(validationResult);
     }
@@ -115,6 +115,8 @@ async function validateService(service, place) {
 module.exports = async function(intentRequest, callback) {
     var service = intentRequest.currentIntent.slots.service;
     var place = intentRequest.currentIntent.slots.northamptonshirePlaceSlot;
+
+    console.log(intentRequest);
     
     console.log(intentRequest.currentIntent.slots);
     

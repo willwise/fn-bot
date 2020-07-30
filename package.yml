@@ -34,7 +34,7 @@ Resources:
             Ref: fnBotServicesTable
           PLACE_TABLE_NAME:
             Ref: fnBotPlaceTable
-      CodeUri: s3://fn-bot-sam-package/7284a7d2d476175725f4fef78774a6a0
+      CodeUri: s3://fn-bot-sam-package/25b84d5f29355b9620ba33f0417f976e
   fnBotServicesTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -81,7 +81,7 @@ Resources:
             Ref: fnBotServicesTable
           BUCKET:
             Ref: fnBotServicesBucket
-      CodeUri: s3://fn-bot-sam-package/7284a7d2d476175725f4fef78774a6a0
+      CodeUri: s3://fn-bot-sam-package/25b84d5f29355b9620ba33f0417f976e
   bulkPlaceUpload:
     Type: AWS::Serverless::Function
     Properties:
@@ -100,7 +100,7 @@ Resources:
             Ref: fnBotPlaceTable
           BUCKET:
             Ref: fnBotServicesBucket
-      CodeUri: s3://fn-bot-sam-package/7284a7d2d476175725f4fef78774a6a0
+      CodeUri: s3://fn-bot-sam-package/25b84d5f29355b9620ba33f0417f976e
   fnBotServicesBucket:
     Type: AWS::S3::Bucket
   fnBotUpdateSlots:
