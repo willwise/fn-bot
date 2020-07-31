@@ -27,12 +27,15 @@ Parameters:
     Type: String
     Default: "mGvGWUtOi5aRYpACv6PyiofCOPkNOhPG"
     Description: "The key for the ordinance survey API"
+    NoEcho: true
   NbcCrmApiKey:
     Type: String
     Description: "The api key for NBCs CRM"
+    NoEcho: true
   NbcCrmApiEndpoint:
     Type: String
     Description: "The api endpoint for NBCs CRM"
+    NoEcho: true
 
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
