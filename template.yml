@@ -27,6 +27,12 @@ Parameters:
     Type: String
     Default: "mGvGWUtOi5aRYpACv6PyiofCOPkNOhPG"
     Description: "The key for the ordinance survey API"
+  NbcCrmApiKey:
+    Type: String
+    Description: "The api key for NBCs CRM"
+  NbcCrmApiEndpoint:
+    Type: String
+    Description: "The api endpoint for NBCs CRM"
 
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
@@ -229,3 +235,19 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: !GetAtt speakToCouncilFunction.Arn
       Principal: lex.amazonaws.com
+  
+  getUserFromCRMFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.getUserFromCRM
+      Runtime: nodejs12.x
+      MemorySize: 64
+      Timeout: 100
+      CodeUri: ./src/getUserFromCRM/
+      Description: A Lambda function that checks for a users phone number in CRM systems and returns an object with details
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Environment:
+        Variables:
+          NBC_API_KEY: !Ref NbcCrmApiKey
+          NBC_API_ENDPOINT: !Ref NbcCrmApiEndpoint
