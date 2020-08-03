@@ -11,7 +11,9 @@ function buildValidationResult(validationResult){
         return {
             "SessionAttributes": {
                 "isCounty":validationResult.isCounty,
-                "localAuth":validationResult.localAuth
+                "localAuth":validationResult.localAuth,
+                "placeRepeat":validationResult.placeRepeat,
+                "serviceRepeat":validationResult.serviceRepeat
             },
             "isValid":validationResult.isValid,
             "violatedSlot":validationResult.violatedSlot,
@@ -21,7 +23,9 @@ function buildValidationResult(validationResult){
     return {
         "SessionAttributes": {
             "isCounty":validationResult.isCounty,
-            "localAuth":validationResult.localAuth
+            "localAuth":validationResult.localAuth,
+            "placeRepeat":validationResult.placeRepeat,
+            "serviceRepeat":validationResult.serviceRepeat
         },
         "isValid":validationResult.isValid,
         "violatedSlot":validationResult.violatedSlot,
@@ -33,15 +37,24 @@ function buildValidationResult(validationResult){
 }
 
 //async function as we have to wait for result from db before returning
-async function validateService(service, place) {
+async function validateService(service, place, placeRepeat, serviceRepeat) {
 
     let validationResult
 
     if(service===null){
-        validationResult = {
-            "isValid": false,
-            "violatedSlot": 'service',
-            "messageContent": `Sorry. I didn't quite understand that. can you please try again or use a different key word`
+        if (serviceRepeat == 0){
+            validationResult = {
+                "isValid": false,
+                "violatedSlot": 'service',
+                "messageContent": `Sorry. I didn't quite understand that. can you please try again or use a different key word`,
+                "serviceRepeat": 1
+            }
+        } else {
+            console.log('hit');
+            validationResult = {
+                "isValid": true,
+                //"messageContent": `We couldn't understand what you were saying so we are transferring you now`
+            }
         }
         return buildValidationResult(validationResult)
     }
@@ -74,11 +87,21 @@ async function validateService(service, place) {
     }
 
     if(JSON.parse(dbService).Items[0].isCounty == null) {
-        validationResult = {
-            "isValid": false,
-            "violatedSlot": 'service',
-            "messageContent": `Sorry. I didn't understand you, please try a different key word.`
+        if(serviceRepeat==0){
+            validationResult = {
+                "isValid": false,
+                "violatedSlot": 'service',
+                "messageContent": `Sorry. I didn't understand you, please try a different key word.`,
+                "serviceRepeat": 1
+            }
+            
+        } else {
+            validationResult = {
+                "isValid": true,
+                "messageContent": `We couldn't understand what you were saying so we are transferring you now`
+            }
         }
+        
         return buildValidationResult(validationResult);
     }
 
@@ -90,12 +113,23 @@ async function validateService(service, place) {
         return buildValidationResult(validationResult);
     }
 
-    if(place == null){
-        validationResult = {
-            "isValid": false,
-            "violatedSlot": 'northamptonshirePlaceSlot',
-            "messageContent": 'So we can direct you to the right person please tell us where you live or where the issue you are reporting is located. For example the name of the town or village you are in'
+    if(place === null){
+
+        if(parseInt(placeRepeat) < 2){
+            console.log("hit");
+            validationResult = {
+                "isValid": false,
+                "violatedSlot": 'northamptonshirePlaceSlot',
+                "messageContent": 'So we can direct you to the right person please tell us where you live or where the issue you are reporting is located. For example the name of the town or village you are in',
+                "placeRepeat": placeRepeat + 1
+            }
+        } else {
+            validationResult = {
+                "isValid": true,
+                //"messageContent": "We couldn't identify where you are so we are transferring you now"
+            }
         }
+
         return buildValidationResult(validationResult);
     }
 
@@ -115,18 +149,32 @@ async function validateService(service, place) {
 module.exports = async function(intentRequest, callback) {
     var service = intentRequest.currentIntent.slots.service;
     var place = intentRequest.currentIntent.slots.northamptonshirePlaceSlot;
+    console.log(intentRequest.sessionAttributes);
 
-    console.log(intentRequest);
+    if(intentRequest.sessionAttributes.hasOwnProperty("serviceRepeat")){
+        var serviceRepeat = intentRequest.sessionAttributes.serviceRepeat;
+    } else {
+        var serviceRepeat = 0;
+    }
     
-    console.log(intentRequest.currentIntent.slots);
+
+    if(intentRequest.sessionAttributes.hasOwnProperty("placeRepeat")){
+        var placeRepeat = intentRequest.sessionAttributes.placeRepeat;
+    } else {
+        var placeRepeat = 0;
+    }
+
+    console.log("service repeat = " + placeRepeat);
+
     
     const source = intentRequest.invocationSource;
     console.log(`the source is ${source}`);
     
     if(source === 'DialogCodeHook') {
         const slots = intentRequest.currentIntent.slots;
+        console.log(intentRequest)
         // wait for validation result
-        const validationResult = await validateService(service, place);
+        const validationResult = await validateService(service, place, placeRepeat, serviceRepeat);
         
         if(!validationResult.isValid) {
             slots[`${validationResult.violatedSlot}`] = null;
@@ -136,4 +184,5 @@ module.exports = async function(intentRequest, callback) {
         callback(lexResponses.delegate(validationResult.SessionAttributes, intentRequest.currentIntent.slots));
         return;
     }
-};
+}
+
