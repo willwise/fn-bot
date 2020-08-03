@@ -31,7 +31,8 @@ function createItem(element, callback) {
             "isCounty": boolIsCounty,
             "Synonyms": element.synonyms.toLowerCase(),
             "isBoth": boolIsBoth,
-            "alternativeServices": element.alternativeServices.toLowerCase()
+            "alternativeServices": element.alternativeServices.toLowerCase(),
+            "LocalGovernmentServiceListId": element.LocalGovernmentServiceListId
         }
     };
 

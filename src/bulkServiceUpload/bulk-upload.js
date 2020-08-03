@@ -40,6 +40,7 @@ function createItem(element) {
             //"Synonyms": element.synonyms.toLowerCase(),
             "isBoth": boolIsBoth,
             //"alternativeServices": element.alternativeServices.toLowerCase()
+            "LocalGovernmentServiceListId": element.LocalGovernmentServiceListId
         }
     };
     if(element.synonym){
