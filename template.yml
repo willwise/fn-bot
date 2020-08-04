@@ -264,203 +264,266 @@ Resources:
         uri: !GetAtt speakToCouncilFunction.Arn
         messageVersion: 1.0
       sampleUtterances:
-        - I want {service}
-        - I need order a {service}
-        - I need to report {service}
-        - I want to make a {service}
-        - What day is my {service}
-        - About getting {service}
-        - Appeal a {service}
-        - Apply for {service}
-        - Apply to join the {service}
-        - Applying for {service}
-        - Are the {service}
-        - Book a {service}
-        - Book onto a {service}
-        - Can I apply for {service}
-        - Can you collect {service}
-        - Collect a {service}
-        - Does my tree have a {service}
-        - Enquiring about {service}
-        - Help with {service}
-        - How do I {service}
-        - How do I get a copy of my {service}
-        - I am calling about {service}
-        - I am calling about a {service}
-        - I am calling about my {service}
-        - I am calling about the {service}
-        - I am ringing about {service}
-        - I am ringing about a {service}
-        - I am ringing about my {service}
-        - I am ringing about the {service}
-        - I cant afford to pay my {service}
-        - I cant find my {service}
-        - I cant pay my {service}
-        - I have {service}
-        - I have a {service}
-        - I have a {service}
-        - I have been given a {service}
-        - I have been kicked out and need {service}
-        - I have been made {service}
-        - I have had a {service}
-        - I have lost my {service}
-        - I have made a mistake on my {service}
-        - I have no {service}
-        - I lost my {service}
-        - I missed a call from my {service}
-        - I missed my {service}
-        - I need {service}
-        - I need a {service}
-        - I need a bigger {service}
-        - I need a copy of my {service}
-        - I need a new {service}
-        - I need a refund on my {service}
-        - I need an {service}
-        - I need the opening times for my {service}
-        - I need to {service}
-        - I need to apply for {service}
-        - I need to apply for a {service}
-        - I need to book a {service}
-        - I need to book in a {service}
-        - I need to discuss my {service}
-        - I need to find a {service}
-        - I need to get {service}
-        - I need to know who my {service}
-        - I need to make a {service}
-        - I need to order a {service}
-        - I need to pay a {service}
-        - I need to pay my {service}
-        - I need to report {service}
-        - I need to report a {service}
-        - I need to report a missed {service}
-        - I need to speak to {service}
-        - I need to speak to an {service}
-        - I need to speak to my {service}
-        - I need to speak to my personal assistant in {service}
-        - I need to speak to some one about giving {service}
-        - I need to speak to some one about my {service}
-        - I need to speak to someone in {service}
-        - I need to speak to the {service}
-        - I need to speak with {service}
-        - I require {service}
-        - I require a {service}
-        - I said {service}
-        - I want a copy of my {service}
-        - I want to add my partner to my {service}
-        - I want to attend a {service}
-        - I want to book a {service}
-        - I want to book onto an {service}
-        - I want to cancel my {service}
-        - I want to claim {service}
-        - I want to complain about my {service}
-        - I want to do a {service}
-        - I want to find the number of my local {service}
-        - I want to get {service}
-        - I want to get through to {service}
-        - I want to know what {service}
-        - I want to make a {service}
-        - I want to pay a {service}
-        - I want to pay my {service}
-        - I want to register to {service}
-        - I want to report {service}
-        - I want to report a {service}
-        - I want to report my neighbour for {service}
-        - I want to run a stall on the {service}
-        - I want to set up a direct debit for my {service}
-        - I want to speak to {service}
-        - I want to speak to your {service}
-        - I want to speak with my {service}
-        - I want to subscribe for {service}
-        - I want to terminate my {service}
-        - I want you to collect an old {service}
-        - I would like apply for a {service}
-        - I would like to {service}
-        - I would like to ask a few questions about the {service}
-        - I would like to be ommited from the {service}
-        - I would like to book a {service}
-        - I would like to claim {service}
-        - I would like to discuss {service}
-        - I would like to discuss {service}
-        - I would like to get rid of my {service}
-        - I would like to know if a {service}
-        - I would like to leave {service}
-        - I would like to leave a {service}
-        - I would like to pay my {service}
-        - I would like to report a {service}
-        - I would like to report that {service}
-        - I would like to speak to my {service}
-        - I would like to speak to someone about {service}
-        - I'd like to {service}
-        - Id like to apply for a {service}
-        - Id like to apply for an {service}
-        - I'd like to book a {service}
-        - I'd like to book a room in the {service}
-        - I'd like to buy a season ticket for the {service}
-        - I'd like to buy my {service}
-        - I'd like to check on my {service}
-        - I'd like to host an {service}
-        - I'd like to know where I came in the {service}
-        - I'd like to make a {service}
-        - I'd like to register my {service}
-        - I'd like to rent a {service}
-        - I'd like to report {service}
-        - I'd like to report a company to {service}
-        - I'd like to report an {service}
-        - I'd like to subscribe to the {service}
-        - I'd like too book a {service}
-        - I'm calling about {service}
-        - I'm calling about my {service}
-        - I'm calling to make a {service}
-        - I'm locked out of my {service}
-        - Information about the {service}
-        - Information on {service}
-        - It wont let me {service}
-        - I've been given a fine for {service}
-        - I've seen some {service}
-        - Make a {service}
-        - Missed {service}
-        - My {service}
-        - My neighbour is causing issues and I need to report {service}
-        - My neighbour keeps {service}
-        - My neighbours are making {service}
-        - My parking {service}
-        - My road is {service}
-        - My road needs {service}
-        - My street is full of {service}
-        - Need help on my {service}
-        - Our group would like to apply for a {service}
-        - Overpayment of {service}
-        - Paused my {service}
-        - Pay my {service}
-        - Paying an {service}
-        - Paying my {service}
-        - Payment of {service}
-        - Renewing my {service}
-        - Report {service}
-        - Report a {service}
-        - Setting up a {service}
-        - Tell you about a {service}
-        - The road has a {service}
-        - The service that deals with {service}
-        - There are {service}
-        - There is {service}
-        - There is a {service}
-        - They haven't collected my {service}
-        - They haven't cut my {service}
-        - To get a {service}
-        - To make a {service}
-        - Up date on my {service}
-        - Want to rent a {service}
-        - What can I put in my {service}
-        - What time do the {service}
-        - What time does the {service}
-        - When are {service}
-        - When are the {service}
-        - When is {service}
-        - When is my {service}
-        - When is {service}
-        - When will my {service}
-        - You have missed my {service}
+- I need order a {service}
+- I need to report {service}
+- I want to make a {service}
+- What day is my {service}
+- About getting {service}
+- Advice on {service}
+- Advice regarding {service}
+- Advice about {service}
+- Advice with {service}
+- Advice around {service}
+- Appeal a {service}
+- Apply for {service}
+- Apply to join the {service}
+- Applying for {service}
+- Are the {service}
+- Are you allowed to {service}
+- Book a {service}
+- Book onto a {service}
+- Can I apply for {service}
+- Can you {service}
+- Can you collect {service}
+- Collect a {service}
+- Contact  {service}
+- Contact a  {service}
+- Contact my {service}
+- Does my tree have a {service}
+- Do you get {service}
+- Enquiring about {service}
+- Help with {service}
+- How do I {service}
+- How do I contact {service}
+- How do I find {service}
+- How do I get a copy of my {service}
+- I am calling about {service}
+- I am calling about a {service}
+- I am calling about my {service}
+- I am calling about the {service}
+- I am ringing about {service}
+- I am ringing about a {service}
+- I am ringing about my {service}
+- I am ringing about the {service}
+- I cant afford to pay my {service}
+- I cant find my {service}
+- I cant pay my {service}
+- I have {service}
+- I have a {service}
+- I have a letter about {service}
+- I have a letter about my {service}
+- I have a letter about our {service}
+- I have a message about {service}
+- I have a message about my {service}
+- I have a message about our {service}
+- I have a question about {service}
+- I have a question regarding {service}
+- I have an email about {service}
+- I have an email about my {service}
+- I have an email about our {service}
+- I have an automated email about {service}
+- I have an automated email about my {service}
+- I have an automated email about our {service}
+- I have been given a {service}
+- I have been kicked out and need {service}
+- I have been made {service}
+- I have had a {service}
+- I have lost my {service}
+- I have made a mistake on my {service}
+- I have no {service}
+- I have recieved {service}
+- I have recieved a {service}
+- I have recieved an {service}
+- I have recieved my {service}
+- I have recieved a letter about {service}
+- I have recieved a letter from you about {service}
+- I have recieved a letter from you about my {service}
+- I have recieved a letter from you about our {service}
+- I have recieved an email about {service}
+- I have recieved an email from you about {service}
+- I have recieved an email from you about my {service}
+- I have recieved an email from you about our {service}
+- I have recieved an automatic email about {service}
+- I have recieved a message about {service}
+- I have recieved a message about my {service}
+- I have recieved a message about our {service}
+- I have recieved a message from you about {service}
+- I have recieved a message from you about my {service}
+- I have recieved a message from you about our {service}
+- I lost my {service}
+- I missed a call from my {service}
+- I missed my {service}
+- I need {service}
+- I need a {service}
+- I need a bigger {service}
+- I need a copy of my {service}
+- I need a new {service}
+- I need a refund on my {service}
+- I need an {service}
+- I need help {service}
+- I need the opening times for my {service}
+- I need to {service}
+- I need to apply for {service}
+- I need to apply for a {service}
+- I need to book a {service}
+- I need to book in a {service}
+- I need to discuss my {service}
+- I need to find a {service}
+- I need to get {service}
+- I need to know who my {service}
+- I need to make a {service}
+- I need to order a {service}
+- I need to pay a {service}
+- I need to pay my {service}
+- I need to report {service}
+- I need to report a {service}
+- I need to report a missed {service}
+- I need to report someone {service}
+- I need to report my neighbour {service}
+- I need to report my neighbour is {service}
+- I need to report our neighbour {service}
+- I need to report our neighbour is {service}
+- I need to speak to {service}
+- I need to speak to an {service}
+- I need to speak to my {service}
+- I need to speak to my personal assistant in {service}
+- I need to speak to some one about giving {service}
+- I need to speak to some one about my {service}
+- I need to speak to someone in {service}
+- I need to speak to the {service}
+- I need to speak with {service}
+- I require {service}
+- I require a {service}
+- I said {service}
+- I want a copy of my {service}
+- I want to add my partner to my {service}
+- I want to attend a {service}
+- I want to book a {service}
+- I want to book onto an {service}
+- I want to cancel my {service}
+- I want to claim {service}
+- I want to complain about my {service}
+- I want to do a {service}
+- I want to find the number of my local {service}
+- I want to get {service}
+- I want to get through to {service}
+- I want to know what {service}
+- I want to pay a {service}
+- I want to pay my {service}
+- I want to register to {service}
+- I want to report {service}
+- I want to report a {service}
+- I want to report my neighbour for {service}
+- I want to run a stall on the {service}
+- I want to set up a direct debit for my {service}
+- I want to speak to {service}
+- I want to speak to your {service}
+- I want to speak with my {service}
+- I want to subscribe for {service}
+- I want to terminate my {service}
+- I want you to collect an old {service}
+- I would like apply for a {service}
+- I would like to {service}
+- I would like to ask a few questions about the {service}
+- I would like to be ommited from the {service}
+- I would like to book a {service}
+- I would like to claim {service}
+- I would like to discuss {service}
+- I would like to discuss {service}
+- I would like to get rid of my {service}
+- I would like to know if a {service}
+- I would like to leave {service}
+- I would like to leave a {service}
+- I would like to pay my {service}
+- I would like to report a {service}
+- I would like to report that {service}
+- I would like to speak to my {service}
+- I would like to speak to someone about {service}
+- I'd like to {service}
+- Id like to apply for a {service}
+- Id like to apply for an {service}
+- I'd like to book a {service}
+- I'd like to book a room in the {service}
+- I'd like to buy a season ticket for the {service}
+- I'd like to buy my {service}
+- I'd like to check on my {service}
+- I'd like to host an {service}
+- I'd like to know where I came in the {service}
+- I'd like to make a {service}
+- I'd like to register my {service}
+- I'd like to rent a {service}
+- I'd like to report {service}
+- I'd like to report a company to {service}
+- I'd like to report an {service}
+- I'd like to subscribe to the {service}
+- I'd like too book a {service}
+- I'm calling about {service}
+- I'm calling about my {service}
+- I'm calling to make a {service}
+- I'm locked out of my {service}
+- Information about the {service}
+- Information on {service}
+- It wont let me {service}
+- I've been given a fine for {service}
+- I've seen some {service}
+- Make a {service}
+- Missed {service}
+- My {service}
+- My neighbour is causing issues and I need to report {service}
+- My neighbour keeps {service}
+- My neighbours are making {service}
+- My parking {service}
+- My road is {service}
+- My road needs {service}
+- My street is full of {service}
+- Need help on my {service}
+- Our group would like to apply for a {service}
+- Overpayment of {service}
+- Paused my {service}
+- Pay my {service}
+- Paying an {service}
+- Paying my {service}
+- Payment of {service}
+- Renewing my {service}
+- Report {service}
+- Report a {service}
+- Report an {service}
+- Setting up a {service}
+- Speak to {service}
+- Speak with {service}
+- Talk to {service}
+- Talk with {service}
+- Talk about {service}
+- Tell you about a {service}
+- The road has a {service}
+- The service that deals with {service}
+- There are {service}
+- There is {service}
+- There is a {service}
+- They haven't collected my {service}
+- They haven't cut my {service}
+- To get a {service}
+- To make a {service}
+- Up date on my {service}
+- Want to rent a {service}
+- What can I put in my {service}
+- What time do the {service}
+- What time does the {service}
+- What are the {service}
+- What are {service}
+- When are {service}
+- When are the {service}
+- When is {service}
+- When is my {service}
+- When is {service}
+- When will my {service}
+- Where is {service}
+- Where is my {service}
+- Where is my nearest {service}
+- Where is my closest  {service}
+- Who is my {service}
+- Who are my {service}
+- You have missed my {service}
       slots:
         - name: service
           description: "what service do you want"
