@@ -21,11 +21,22 @@ exports.rebuildBot = async (event, context) => {
 
     for (const record of event.Records) {
         if(record.eventName === "INSERT"){
-            console.log('DynamoDB Record: %j', record.dynamodb.NewImage.ServiceName.S);
-            slotTypePromise.enumerationValues.push({
-                synonyms:[record.dynamodb.NewImage.Synonyms.S],
-                value: record.dynamodb.NewImage.ServiceName.S
-            });
+            console.log('DynamoDB Record: %j', record.dynamodb.NewImage.PlaceName.S);
+            console.log(record.dynamodb.NewImage);
+            var array = []
+            if(record.dynamodb.NewImage.hasOwnProperty("Synonyms")){
+                array = record.dynamodb.NewImage.Synonyms.S.split(',');
+                console.log(array);
+            }
+            var item = {
+                value: record.dynamodb.NewImage.PlaceName.S
+            }
+
+            if(array.length > 0){
+                item['synonyms'] = array;
+            }
+
+            slotTypePromise.enumerationValues.push(item);
         }
     }
     // return `Successfully processed ${event.Records.length} records.`;
@@ -34,8 +45,11 @@ exports.rebuildBot = async (event, context) => {
     var newSlot = {
         name: slotName,
         checksum: slotTypePromise.checksum,
-        enumerationValues: slotTypePromise.enumerationValues
+        enumerationValues: slotTypePromise.enumerationValues,
+        valueSelectionStrategy: 'TOP_RESOLUTION'
     }
+
+    console.log(newSlot);
 
     var newBuild = await lexmodelbuildingservice.putSlotType(newSlot).promise();
 

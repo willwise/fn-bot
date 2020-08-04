@@ -2,17 +2,17 @@
 
 const AWS = require('aws-sdk');
 const docClient = new AWS.DynamoDB.DocumentClient({region: 'eu-west-2'});
-const tableName = process.env.TABLE_NAME
+const tableName = process.env.PLACE_TABLE_NAME
 
-module.exports.isCounty = async function(service){
+module.exports.getPlace = async function(place){
     let params = {
         TableName: tableName,
-        KeyConditionExpression: "#name = :service",
+        KeyConditionExpression: "#name = :place",
         ExpressionAttributeNames: {
-            "#name": "ServiceName"
+            "#name": "PlaceName"
         },
         ExpressionAttributeValues: {
-            ":service": service.toLowerCase()
+            ":place": place.toLowerCase()
         }
     };
 

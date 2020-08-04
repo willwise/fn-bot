@@ -1,14 +1,14 @@
 {
-  "name": "rebuildbot",
+  "name": "bulkplaceupload",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "bulkPlaceUpload.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.692.0"
+    "csvtojson": "^2.0.10"
   }
 }

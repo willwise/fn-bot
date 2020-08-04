@@ -5,32 +5,25 @@ var AWS = require("aws-sdk");
 AWS.config.update({region:"eu-west-2"});
 
 exports.bulkUpload = async(event, context, callback) => {
-    var fileName = 'data/Services-plus queries-NCC (2).csv'
+    var fileName = 'data/northamptonshire-places.csv'
     var bucket = process.env.BUCKET
-    var jsonServices = await getCsv(bucket, fileName); //can probably make these params
+    var jsonServices = await getCsv(bucket, fileName);
     jsonServices.forEach(element => {
-        createItem(element.serviceName, element.isCounty, element.synonym)
+        createItem(element)
     });
     callback(null,);
 }
 
-function createItem(serviceName, isCounty, synonyms) {
+function createItem(element) {
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var tableName = process.env.TABLE_NAME;
-    var boolIsCounty;
-    if (isCounty == 'true'){
-        boolIsCounty = true;
-    } else {
-        boolIsCounty = false;
-    }
 
     var params = {
         TableName: tableName,
         Item: {
-            "ServiceName": serviceName.toLowerCase(),
-            "isCounty": boolIsCounty,
-            "Synonyms": synonyms.toLowerCase()
+            "PlaceName": element.PlaceName.toLowerCase(),
+            "DistrictOrBorough": element.LocalAuthority.toUpperCase()
         }
     };
 
