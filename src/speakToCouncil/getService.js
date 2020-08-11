@@ -37,7 +37,8 @@ function buildValidationResult(validationResult){
 }
 
 //async function as we have to wait for result from db before returning
-async function validateService(service, place, placeRepeat, serviceRepeat) {
+async function validateService(service, place, placeRepeat, serviceRepeat, localCouncil) {
+    console.log(`local council: ${localCouncil}`);
 
     let validationResult
 
@@ -113,7 +114,7 @@ async function validateService(service, place, placeRepeat, serviceRepeat) {
         return buildValidationResult(validationResult);
     }
 
-    if(place === null){
+    if(place === null && localCouncil == null){
 
         if(parseInt(placeRepeat) < 2){
             console.log("hit");
@@ -133,6 +134,15 @@ async function validateService(service, place, placeRepeat, serviceRepeat) {
         return buildValidationResult(validationResult);
     }
 
+    if(localCouncil !== null){
+        validationResult = {
+            "isValid": true,
+            "isCounty": JSON.parse(dbService).Items[0].isCounty,
+            "localAuth": localCouncil.toUpperCase()
+        }
+        return buildValidationResult(validationResult);
+    }
+
     var getPlace = await getCouncil.getPlace(place);
 
     validationResult = {
@@ -149,12 +159,12 @@ async function validateService(service, place, placeRepeat, serviceRepeat) {
 module.exports = async function(intentRequest, callback) {
     var service = intentRequest.currentIntent.slots.service;
     var place = intentRequest.currentIntent.slots.northamptonshirePlaceSlot;
+    var localCouncil;
     console.log(intentRequest.sessionAttributes);
 
-    if(intentRequest.sessionAttributes.hasOwnProperty("northamptonshirePlaceSlot")){
-        if(intentRequest.currentIntent.slots.northamptonshirePlaceSlot == null){
-            place = intentRequest.sessionAttributes.northamptonshirePlaceSlot;
-        }
+    if(intentRequest.sessionAttributes.hasOwnProperty("northamptonPlaceName")){
+        console.log("we've got the attribute");
+        localCouncil = intentRequest.sessionAttributes.northamptonPlaceName;
     }
     if(intentRequest.sessionAttributes.hasOwnProperty("serviceRepeat")){
         var serviceRepeat = intentRequest.sessionAttributes.serviceRepeat;
@@ -179,7 +189,7 @@ module.exports = async function(intentRequest, callback) {
         const slots = intentRequest.currentIntent.slots;
         console.log(intentRequest)
         // wait for validation result
-        const validationResult = await validateService(service, place, placeRepeat, serviceRepeat);
+        const validationResult = await validateService(service, place, placeRepeat, serviceRepeat, localCouncil);
         
         if(!validationResult.isValid) {
             slots[`${validationResult.violatedSlot}`] = null;
