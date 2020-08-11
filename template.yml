@@ -25,7 +25,6 @@ Parameters:
     Description: "The type of workload (environment) that this stack will run"
   OsApiKey:
     Type: String
-    Default: "mGvGWUtOi5aRYpACv6PyiofCOPkNOhPG"
     Description: "The key for the ordinance survey API"
     NoEcho: true
   NbcCrmApiKey:
