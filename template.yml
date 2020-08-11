@@ -555,6 +555,7 @@ Resources:
     Type: Custom::LexBot
     DependsOn: 
       - speakToCouncilIntent
+      - speakToHumanIntent
     Properties:
       ServiceToken:
         Fn::ImportValue: cfn-lex-bot-1-0-4-ServiceToken
@@ -577,6 +578,9 @@ Resources:
       intents:
         - intentName:
             Ref: speakToCouncilIntent
+          intentVersion: "$LATEST"
+        - intentName:
+            Ref: speakToHumanIntent
           intentVersion: "$LATEST"
       locale: en-US
       processBehavior: "BUILD"
@@ -614,13 +618,10 @@ Resources:
       ServiceToken:
         Fn::ImportValue: cfn-lex-intent-1-0-3-ServiceToken
       name: !Sub
-        - '${AWS::StackName}_speak_to_council_sam_${Workload}'
+        - '${AWS::StackName}_speak_to_human_${Workload}'
         - Workload: !Ref Workload
       fulfillmentActivity: 
         type: "ReturnIntent"
-      dialogCodeHook: 
-        uri: !GetAtt speakToCouncilFunction.Arn
-        messageVersion: 1.0
       sampleUtterances:
         - You are a {expletive}
         - '{expletive} off'
@@ -645,7 +646,7 @@ Resources:
       ServiceToken:
         Fn::ImportValue: cfn-lex-slot-type-1-0-3-ServiceToken
       name: !Sub 
-        - '${AWS::StackName}_service_type_${Workload}'
+        - '${AWS::StackName}_expletive_${Workload}'
         - Workload: !Ref Workload
       description: a list of offensive words and the like
       valueSelectionStrategy: TOP_RESOLUTION
