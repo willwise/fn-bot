@@ -36,6 +36,10 @@ Parameters:
     Type: String
     Description: "The api endpoint for NBCs CRM"
     NoEcho: true
+  OsApiEndpoint:
+    Type: String
+    Description: "The api endpoint for the OS poscode lookup"
+    NoEcho: true
 
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
@@ -67,6 +71,9 @@ Resources:
             Ref: fnBotServicesTable
           PLACE_TABLE_NAME:
             Ref: fnBotPlaceTable
+          OS_API_ENDPOINT:
+            - '${OsApiEndpoint}'
+            - OsApiEndpoint: !Ref OsApiEndpoint
 
   fnBotServicesTable:
     Type: AWS::DynamoDB::Table
