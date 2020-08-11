@@ -25,7 +25,6 @@ Parameters:
     Description: "The type of workload (environment) that this stack will run"
   OsApiKey:
     Type: String
-    Default: "mGvGWUtOi5aRYpACv6PyiofCOPkNOhPG"
     Description: "The key for the ordinance survey API"
     NoEcho: true
   NbcCrmApiKey:
@@ -35,6 +34,10 @@ Parameters:
   NbcCrmApiEndpoint:
     Type: String
     Description: "The api endpoint for NBCs CRM"
+    NoEcho: true
+  OsApiEndpoint:
+    Type: String
+    Description: "The api endpoint for the OS poscode lookup"
     NoEcho: true
 
 # Resources declares the AWS resources that you want to include in the stack
@@ -67,6 +70,9 @@ Resources:
             Ref: fnBotServicesTable
           PLACE_TABLE_NAME:
             Ref: fnBotPlaceTable
+          OS_API_ENDPOINT:
+            - '${OsApiEndpoint}'
+            - OsApiEndpoint: !Ref OsApiEndpoint
 
   fnBotServicesTable:
     Type: AWS::DynamoDB::Table
