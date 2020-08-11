@@ -151,6 +151,11 @@ module.exports = async function(intentRequest, callback) {
     var place = intentRequest.currentIntent.slots.northamptonshirePlaceSlot;
     console.log(intentRequest.sessionAttributes);
 
+    if(intentRequest.sessionAttributes.hasOwnProperty("northamptonshirePlaceSlot")){
+        if(intentRequest.currentIntent.slots.northamptonshirePlaceSlot == null){
+            place = intentRequest.sessionAttributes.northamptonshirePlaceSlot;
+        }
+    }
     if(intentRequest.sessionAttributes.hasOwnProperty("serviceRepeat")){
         var serviceRepeat = intentRequest.sessionAttributes.serviceRepeat;
     } else {
