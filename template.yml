@@ -561,6 +561,7 @@ Resources:
     Type: Custom::LexBot
     DependsOn: 
       - speakToCouncilIntent
+      - speakToHumanIntent
     Properties:
       ServiceToken:
         Fn::ImportValue: cfn-lex-bot-1-0-4-ServiceToken
@@ -583,6 +584,9 @@ Resources:
       intents:
         - intentName:
             Ref: speakToCouncilIntent
+          intentVersion: "$LATEST"
+        - intentName:
+            Ref: speakToHumanIntent
           intentVersion: "$LATEST"
       locale: en-US
       processBehavior: "BUILD"
@@ -610,3 +614,54 @@ Resources:
         Variables:
           NBC_API_KEY: !Ref NbcCrmApiKey
           NBC_API_ENDPOINT: !Ref NbcCrmApiEndpoint
+
+
+  speakToHumanIntent:
+    Type: Custom::LexIntent
+    DependsOn: 
+    - expletiveSlot
+    Properties:
+      ServiceToken:
+        Fn::ImportValue: cfn-lex-intent-1-0-3-ServiceToken
+      name: !Sub
+        - '${AWS::StackName}_speak_to_human_${Workload}'
+        - Workload: !Ref Workload
+      fulfillmentActivity: 
+        type: "ReturnIntent"
+      sampleUtterances:
+        - You are a {expletive}
+        - '{expletive} off'
+        - This is {expletive}
+      slots:
+        - name: expletive
+          description: "For when the user is agitated and just wants to speak to a human"
+          priority: 1
+          slotConstraint: Required
+          slotType:
+            Ref: expletiveSlot
+          slotTypeVersion: "$LATEST"
+          valueElicitationPrompt:
+            maxAttempts: 1
+            messages:
+            - content: Sorry
+              contentType: PlainText
+
+  expletiveSlot:
+    Type: Custom::LexSlotType
+    Properties:
+      ServiceToken:
+        Fn::ImportValue: cfn-lex-slot-type-1-0-3-ServiceToken
+      name: !Sub 
+        - '${AWS::StackName}_expletive_${Workload}'
+        - Workload: !Ref Workload
+      description: a list of offensive words and the like
+      valueSelectionStrategy: TOP_RESOLUTION
+      enumerationValues:
+      - value: bullshit
+      - value: cunt
+      - value: fuck
+      - value: shit
+      - value: I want to speak to a human
+      - value: wasteman
+      - value: wanker
+      - value: crap
