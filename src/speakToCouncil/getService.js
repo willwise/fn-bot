@@ -114,7 +114,7 @@ async function validateService(service, place, placeRepeat, serviceRepeat, local
         return buildValidationResult(validationResult);
     }
 
-    if(place === null && localCouncil == null){
+    if(place === null && (localCouncil == null || localCouncil == "")){
 
         if(parseInt(placeRepeat) < 2){
             console.log("hit");
@@ -134,7 +134,7 @@ async function validateService(service, place, placeRepeat, serviceRepeat, local
         return buildValidationResult(validationResult);
     }
 
-    if(localCouncil !== null){
+    if(localCouncil !== null && localCouncil !== ""){
         validationResult = {
             "isValid": true,
             "isCounty": JSON.parse(dbService).Items[0].isCounty,
