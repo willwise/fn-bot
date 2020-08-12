@@ -70,7 +70,7 @@ Resources:
             Ref: fnBotServicesTable
           PLACE_TABLE_NAME:
             Ref: fnBotPlaceTable
-          OS_API_ENDPOINT:
+          OS_API_ENDPOINT: !Sub
             - '${OsApiEndpoint}'
             - OsApiEndpoint: !Ref OsApiEndpoint
 
