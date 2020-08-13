@@ -576,7 +576,7 @@ Resources:
       clarificationPrompt:
         maxAttempts: 1
         messages:
-          - content: "I'm sorry, I didn't hear that. Can you repeate what you just said?"
+          - content: "Sorry. I didn't quite understand that. can you please try again or use a different key word"
             contentType: "PlainText"
       description: 'BOT'
       voiceId: Joanna
