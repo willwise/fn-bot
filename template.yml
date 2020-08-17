@@ -570,7 +570,7 @@ Resources:
         - Workload: !Ref Workload
       abortStatement:
         messages:
-          - content: "I dont understand"
+          - content: "We cannot understand the key word you have said so we are transferring you to a human"
             contentType: "PlainText"
       childDirected: false
       clarificationPrompt:
