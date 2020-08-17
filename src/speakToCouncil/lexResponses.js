@@ -1,11 +1,12 @@
 'use strict';
 
-module.exports.delegate = function(sessionAttributes, slots) {
+module.exports.delegate = function(sessionAttributes, slots, message) {
     return{
         sessionAttributes,
         dialogAction:{
             type: 'Delegate',
-            slots
+            slots,
+            message
         },
     };
 };
@@ -22,6 +23,17 @@ module.exports.elicitSlot = function(sessionAttributes, intentName, slots, slotT
     }
   };
 };
+
+module.exports.closeSlot = function(sessionAttributes, message){
+  return {
+    sessionAttributes,
+    dialogAction: {
+      type: 'Close',
+      fulfillmentState:'Fulfilled',
+      message
+    }
+  }
+}
 
 function getResponseCard(title, imageUrl, buttons) {
   return {

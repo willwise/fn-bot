@@ -54,7 +54,7 @@ async function validateService(service, place, placeRepeat, serviceRepeat, local
             console.log('hit');
             validationResult = {
                 "isValid": true,
-                //"messageContent": `We couldn't understand what you were saying so we are transferring you now`
+                "messageContent": `We couldn't understand what you were saying so we are transferring you now`
             }
         }
         return buildValidationResult(validationResult)
@@ -127,18 +127,19 @@ async function validateService(service, place, placeRepeat, serviceRepeat, local
         } else {
             validationResult = {
                 "isValid": true,
-                //"messageContent": "We couldn't identify where you are so we are transferring you now"
+                "messageContent": "We couldn't identify where you are so we are transferring you now"
             }
         }
 
         return buildValidationResult(validationResult);
     }
 
-    if(localCouncil !== null && localCouncil !== ""){
+    if(localCouncil != null && localCouncil != "" && localCouncil != undefined){
         validationResult = {
             "isValid": true,
             "isCounty": JSON.parse(dbService).Items[0].isCounty,
-            "localAuth": localCouncil.toUpperCase()
+            "localAuth": localCouncil.toUpperCase(),
+            "messageContent": `The service is ${service} and the local authority is ${localCouncil.toUpperCase()}`
         }
         return buildValidationResult(validationResult);
     }
@@ -148,7 +149,8 @@ async function validateService(service, place, placeRepeat, serviceRepeat, local
     validationResult = {
         "isValid": true,
         "isCounty": JSON.parse(dbService).Items[0].isCounty,
-        "localAuth": JSON.parse(getPlace).Items[0].DistrictOrBorough
+        "localAuth": JSON.parse(getPlace).Items[0].DistrictOrBorough,
+        "messageContent": `The service is ${service} and the local authority is ${JSON.parse(getPlace).Items[0].DistrictOrBorough}`
     }
 
     return buildValidationResult(validationResult);
@@ -196,7 +198,8 @@ module.exports = async function(intentRequest, callback) {
             callback(lexResponses.elicitSlot(validationResult.SessionAttributes, intentRequest.currentIntent.name, slots, validationResult.violatedSlot, validationResult.message));
             return;
         }
-        callback(lexResponses.delegate(validationResult.SessionAttributes, intentRequest.currentIntent.slots));
+        //callback(lexResponses.delegate(validationResult.SessionAttributes, intentRequest.currentIntent.slots));
+        callback(lexResponses.closeSlot(validationResult.SessionAttributes,validationResult.message));
         return;
     }
 }
