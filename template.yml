@@ -629,9 +629,59 @@ Resources:
       fulfillmentActivity: 
         type: "ReturnIntent"
       sampleUtterances:
-        - You are a {expletive}
         - '{expletive} off'
+        - go away
+        - '{expletive} robot'
+        - Oh for {expletive} sake 
+        - For {expletive} sake
+        - Not another {expletive} robot
+        - Put me through to someone 
+        - Just put me through to someone
+        - Just {expletive} put me through to someone 
+        - Just let me talk to a person already
+        - I just want to talk to someone 
+        - I just want to {expletive} talk to someone 
+        - I want to talk to someone 
+        - I want to talk to a real person 
+        - I'm confused 
+        - I don't understand 
+        - I don't care 
+        - I don't like it 
+        - I dont want to talk to you 
+        - I dont want to tell you
+        - I dont want to give you a key word or phrase I just want to talk to someone
+        - I want to talk to a human 
+        - I want to talk to a human being 
+        - I want to talk to your manager
+        - I will {expletive} if you dont put me through to someone 
+        - I will {expletive} {expletive} if you dont put me through to someone
+        - I {expletive} hate this {expletive}
+        - I hate this {expletive}
+        - I hate bots
+        - This isn't what I pay my taxes for 
+        - This isn't what I pay my council tax for 
+        - This bot sucks
         - This is {expletive}
+        - La la la la 
+        - Blar blar blar 
+        - Hello I don't understand 
+        - Hello
+        - What do you expect me to say
+        - Can I talk to your manager
+        - Jesus {expletive} christ
+        - oh my {expletive} god
+        - '{expletive} jesus h christ' 
+        - Jesus H Christ
+        - what are you {expletive} talking about 
+        - You {expletive}
+        - You're a {expletive}
+        - You are a {expletive}
+        - Shut up 
+        - Shut the {expletive} up 
+        - Shove your bot up your {expletive}
+        - '{expletive} bot'
+        - Well shit it's a {expletive} bot
+        - '{expletive} hell its a {expletive} bot'
       slots:
         - name: expletive
           description: "For when the user is agitated and just wants to speak to a human"
@@ -657,11 +707,126 @@ Resources:
       description: a list of offensive words and the like
       valueSelectionStrategy: TOP_RESOLUTION
       enumerationValues:
-      - value: bullshit
       - value: cunt
+        synonyms:
+          - pussy
+          - tit
+          - muff
       - value: fuck
+        synonyms:
+          - fucking
+          - fucker
+          - mother fucker
+          - bugger
+          - screw
       - value: shit
+        synonyms:
+          - crap
+          - bullshit
+          - jackshit
+          - shite
       - value: I want to speak to a human
       - value: wasteman
       - value: wanker
-      - value: crap
+        synonyms:
+        - tosser
+      - value: hate
+      - value: twat
+      - value: waste of time
+        synonyms:
+          - time waster
+      - value: arse
+        synonyms:
+          - arsehole
+          - bum
+          - anal
+          - anus
+          - ass
+          - arse licker
+          - booty
+          - butt plug
+          - butt fuck
+          - but fucker
+      - value: dick
+        synonyms: 
+          - dickhead
+          - nob
+          - nobhead
+          - penis
+          - prick
+          - cock
+          - cock sucker
+          - dick sucker
+          - nob jockey
+          - bell end
+          - bollocks
+          - testicles
+          - balls
+          - ball
+          - ball licker
+          - ball sack
+          - cock head
+          - pecker
+          - chopper
+          - schlong
+      - value: whore
+        synonyms:
+          - slag
+          - slut
+          - bitch
+      - value: piss
+        synonyms:
+          - pissed
+          - pissing
+      - value: bastard
+      - value: gay
+        synonyms:
+          - fag
+          - faggot
+          - dyke
+          - queer
+          - poof
+          - batty boy
+          - fudge packer
+          - homo
+      - value: retard
+        synonyms:
+          - nutter
+          - mong
+          - tard
+          - spaz
+          - spastic
+      - value: bloody
+      - value: stupid
+        synonyms:
+          - dumb
+          - moron
+          - idiot
+          - rubbish
+      - value: Put me through to someone 
+      - value: Just put me through to someone
+      - value: Just let me talk to a person already
+      - value: I just want to talk to someone 
+      - value: I want to talk to someone 
+      - value: I want to talk to a real person 
+      - value: I'm confused 
+      - value: I don't understand 
+      - value: I don't care 
+      - value: I don't like it 
+      - value: I dont want to talk to you 
+      - value: I dont want to tell you
+      - value: I dont want to give you a key word or phrase I just want to talk to someone
+      - value: I want to talk to a human 
+      - value: I want to talk to a human being 
+      - value: I want to talk to your manager
+      - value: I hate bots
+      - value: This isn't what I pay my taxes for 
+      - value: This isn't what I pay my council tax for 
+      - value: La la la la 
+      - value: Blar blar blar 
+      - value: Hello I don't understand 
+      - value: Hello
+      - value: What do you expect me to say
+      - value: Can I talk to your manager
+      - value: Jesus H Christ
+      - value: Shut up
