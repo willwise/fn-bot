@@ -51,7 +51,6 @@ async function validateService(service, place, placeRepeat, serviceRepeat, local
                 "serviceRepeat": 1
             }
         } else {
-            console.log('hit');
             validationResult = {
                 "isValid": true,
                 "messageContent": `We couldn't understand what you were saying so we are transferring you now`
@@ -109,7 +108,8 @@ async function validateService(service, place, placeRepeat, serviceRepeat, local
     if(JSON.parse(dbService).Items[0].isCounty == true){
         validationResult = {
             "isValid": true,
-            "isCounty": JSON.parse(dbService).Items[0].isCounty
+            "isCounty": JSON.parse(dbService).Items[0].isCounty,
+            "messageContent": "We are passing you to the county now"
         }
         return buildValidationResult(validationResult);
     }
@@ -117,7 +117,6 @@ async function validateService(service, place, placeRepeat, serviceRepeat, local
     if(place === null && (localCouncil == null || localCouncil == "")){
 
         if(parseInt(placeRepeat) < 2){
-            console.log("hit");
             validationResult = {
                 "isValid": false,
                 "violatedSlot": 'northamptonshirePlaceSlot',
