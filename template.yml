@@ -530,6 +530,67 @@ Resources:
         - Who is my {service}
         - Who are my {service}
         - You have missed my {service}
+        - I need to request a {service}
+        - I want to request a {service}
+        - Can I request a {service}
+        - How do I request a {service}
+        - Request a {service}
+        - Location of {service}
+        - I need to know the location of {service}
+        - I need to know the location of the {service}
+        - I need to know the location of a {service}
+        - I need to know the location of my {service}
+        - Where is the location of {service}
+        - Where is the location of the {service}
+        - Where is the location of a {service}
+        - Where is the location of my {service}
+        - Can you tell me the location of {service}
+        - Can you tell me the location of the {service}
+        - Can you tell me the location of a {service}
+        - Can you tell me the location of my {service}
+        - I want to know the location of {service}
+        - I want to know the location of the {service}
+        - I want to know the location of a {service}
+        - I want to know the location of my {service}
+        - I'd like to discuss {service}
+        - I'm calling about my {service} that wasn't emptied
+        - I'm calling about my {service} that wasn't collected
+        - I'm calling about my {service} that wasn't picked up
+        - I'm calling about my {service} that wasn't taken away
+        - Can you tell me when the {service} are open
+        - Can you tell me when the {service} are closed
+        - Can you tell me when the {service} are open please
+        - Can you tell me when the {service} are closed please
+        - I would like to know when the {service} are open
+        - I would like to know when the {service} are closed
+        - I would like to know when the {service} are open please
+        - I would like to know when the {service} are closed please
+        - When do the {service} open
+        - When do the {service} close 
+        - When do the {service} open please
+        - When do the {service} close please
+        - What time do the {service} open
+        - What time do the {service} close 
+        - What time do the {service} open please
+        - What time do the {service} close please
+        - What time does the {service} open
+        - What time does the {service} close 
+        - What time does the {service} open please
+        - What time does the {service} close please
+        - '{service} opening times'
+        - '{service} closing times'
+        - '{service} term times'
+        - Opening times for {service}
+        - Closing times for {service}
+        - Term times for {service}
+        - Renew {service}
+        - Renew a {service}
+        - Renew my {service}
+        - Renew our {service}
+        - '{service} problem'
+        - Replacement {service}
+        - Room booking at {service}
+        - Book a room at {service}
       slots:
         - name: service
           description: "what service do you want"
