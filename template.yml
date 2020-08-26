@@ -698,8 +698,8 @@ Resources:
         - Just {expletive} put me through to someone 
         - I just want to {expletive} talk to someone 
         - I will {expletive} if you dont put me through to someone 
-        - I will {expletive} {expletive} if you dont put me through to someone
-        - I {expletive} hate this {expletive}
+        - I will {expletive} if you dont put me through to someone
+        - I {expletive} hate this
         - I hate this {expletive}
         - This is {expletive}
         - Jesus {expletive} christ
@@ -713,8 +713,8 @@ Resources:
         - Shove your bot up your {expletive}
         - '{expletive} bot'
         - Well shit it's a {expletive} bot
-        - '{expletive} hell its a {expletive} bot'
-        - '{expletive}' hate these machines
+        - '{expletive} hell its a bot'
+        - '{expletive} hate these machines'
         - Try harder you {expletive}
         - Suck my {expletive}
       slots:
