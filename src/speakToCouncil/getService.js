@@ -109,7 +109,7 @@ async function validateService(service, place, placeRepeat, serviceRepeat, local
         validationResult = {
             "isValid": true,
             "isCounty": JSON.parse(dbService).Items[0].isCounty,
-            "messageContent": "We are passing you to the county now"
+            "messageContent": `The service you have asked for is ${service}. This is a county call`
         }
         return buildValidationResult(validationResult);
     }
