@@ -109,7 +109,7 @@ async function validateService(service, place, placeRepeat, serviceRepeat, local
         validationResult = {
             "isValid": true,
             "isCounty": JSON.parse(dbService).Items[0].isCounty,
-            "messageContent": `The service you have asked for is ${service}. This is a county call`
+            "messageContent": `The service you have asked for is ${service}. We are transferring you now`
         }
         return buildValidationResult(validationResult);
     }
@@ -138,7 +138,7 @@ async function validateService(service, place, placeRepeat, serviceRepeat, local
             "isValid": true,
             "isCounty": JSON.parse(dbService).Items[0].isCounty,
             "localAuth": localCouncil.toUpperCase(),
-            "messageContent": `The service is ${service} and the local authority is ${localCouncil.toUpperCase()}`
+            "messageContent": `The service is ${service}. We are transferring you now`
         }
         return buildValidationResult(validationResult);
     }
@@ -149,7 +149,7 @@ async function validateService(service, place, placeRepeat, serviceRepeat, local
         "isValid": true,
         "isCounty": JSON.parse(dbService).Items[0].isCounty,
         "localAuth": JSON.parse(getPlace).Items[0].DistrictOrBorough,
-        "messageContent": `The service is ${service} and the local authority is ${JSON.parse(getPlace).Items[0].DistrictOrBorough}`
+        "messageContent": `The service is ${service}. We are transferring you now`
     }
 
     return buildValidationResult(validationResult);
